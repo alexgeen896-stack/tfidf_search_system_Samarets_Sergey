@@ -1,7 +1,25 @@
-prepare:
-  test_size: 0.2
-  random_state: 42
-
-train:
-  model_type: "logistic_regression"
-  random_state: 42
+﻿data:
+  input_file: "data/raw/offers.csv"
+  text_columns: 
+    - "name"
+    - "description" 
+    - "brand"
+  id_column: "id"
+  
+tfidf:
+  max_features: 5000  # увеличим
+  min_df: 1  # уменьшаем до 1 - включаем даже уникальные слова
+  max_df: 0.95  # увеличим
+  ngram_range: [1, 2]
+  stop_words: "english"
+  
+preprocessing:
+  remove_punctuation: true
+  remove_numbers: true
+  lowercase: true
+  remove_stopwords: false  # отключаем для брендов
+  language: "russian"
+  
+search:
+  top_n: 10  # увеличим кол-во результатов
+  similarity_threshold: 0.05  # уменьшим порог

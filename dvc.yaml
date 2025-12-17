@@ -1,16 +1,22 @@
-stages:
+﻿stages:
   prepare:
     cmd: python src/prepare.py
     deps:
     - params.yaml
     - src/prepare.py
+    - data/raw/offers.csv
     outs:
-    - data/processed
-  train:
-    cmd: python src/train.py
+    - data/processed/prepared_data.csv
+  
+  index:
+    cmd: python src/index.py
     deps:
-    - data/processed
     - params.yaml
-    - src/train.py
+    - src/index.py
+    - data/processed/prepared_data.csv
     outs:
-    - model.pkl
+    - data/processed/tfidf_vectorizer.pkl
+    - data/processed/tfidf_matrix.pkl
+    - data/processed/metadata.csv
+  
+  # search stage не нужен, так как это интерактивный режим

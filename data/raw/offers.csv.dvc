@@ -1,0 +1,5 @@
+outs:
+- md5: 6dcaa12ee1504018ffa3f4e72c4975f1
+  size: 2328456
+  hash: md5
+  path: offers.csv

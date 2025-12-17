@@ -3,20 +3,23 @@ stages:
   prepare:
     cmd: python src/prepare.py
     deps:
+    - path: data/raw/offers.csv
+      hash: md5
+      md5: 6dcaa12ee1504018ffa3f4e72c4975f1
+      size: 2328456
     - path: params.yaml
       hash: md5
-      md5: aeb5fa5aeea8494c646355bb558e4492
-      size: 109
+      md5: e9756406bcd3b7b1b083b6f437a37d2b
+      size: 678
     - path: src/prepare.py
       hash: md5
-      md5: 047f81450cd585ba1a780d86a7fb0f89
-      size: 1540
+      md5: 51daa08f5b6a53f5377d0d9ae7c2cc92
+      size: 7271
     outs:
-    - path: data/processed
+    - path: data/processed/prepared_data.csv
       hash: md5
-      md5: c719b2be1a70ac0ea2812d8b85d299d1.dir
-      size: 3158
-      nfiles: 4
+      md5: e90c993c719ca3546b9c31efc3805a81
+      size: 6745135
   train:
     cmd: python src/train.py
     deps:
@@ -38,3 +41,31 @@ stages:
       hash: md5
       md5: 84848247d7ec0d435887670916db5da4
       size: 1001
+  index:
+    cmd: python src/index.py
+    deps:
+    - path: data/processed/prepared_data.csv
+      hash: md5
+      md5: e90c993c719ca3546b9c31efc3805a81
+      size: 6745135
+    - path: params.yaml
+      hash: md5
+      md5: e9756406bcd3b7b1b083b6f437a37d2b
+      size: 678
+    - path: src/index.py
+      hash: md5
+      md5: db8ad0b2701a225df6d735beb0df6ee5
+      size: 5155
+    outs:
+    - path: data/processed/metadata.csv
+      hash: md5
+      md5: 03b584f97f3e1dda4fbb72178378b8d7
+      size: 2412589
+    - path: data/processed/tfidf_matrix.pkl
+      hash: md5
+      md5: df39db09fa661e106719dbde97436dfc
+      size: 1310671
+    - path: data/processed/tfidf_vectorizer.pkl
+      hash: md5
+      md5: 6ead42bfc1beedad2306b0ed335839af
+      size: 263211
